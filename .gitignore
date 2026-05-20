@@ -1,1 +1,10 @@
-/bin/
+bin/
+.project
+.classpath
+.settings/
+
+*.log
+*.tmp
+*.bak
+
+.DS_Store

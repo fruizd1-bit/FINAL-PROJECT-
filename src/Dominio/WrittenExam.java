@@ -26,4 +26,11 @@ public class WrittenExam extends Evaluation {
     public double calculateContribution() {
         return (score * percentage) / 100;
     }
+
+    @Override
+    public String toString() {
+        return "Written Exam: " + name +
+               " | Nota: " + score +
+               " | Porcentaje: " + percentage;
+    }
 }

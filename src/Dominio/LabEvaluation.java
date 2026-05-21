@@ -26,4 +26,11 @@ public class LabEvaluation extends Evaluation {
     public double calculateContribution() {
         return (score * percentage) / 100;
     }
+
+    @Override
+    public String toString() {
+        return "Lab Evaluation: " + name +
+               " | Nota: " + score +
+               " | Porcentaje: " + percentage;
+    }
 }

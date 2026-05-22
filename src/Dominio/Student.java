@@ -1,17 +1,19 @@
 package Dominio;
-
+import java.util.ArrayList;
 public class Student {
 
     private String id;
     private String name;
     private String email;
-
+    private ArrayList<Course> courses;
+    
     // Constructor
     public Student(String id, String name, String email) {
     	setId(id);
         setName(name);
         setEmail(email);
        
+        this.courses = new ArrayList<>();
     }
 
     // Getter ID
@@ -57,6 +59,18 @@ public class Student {
         }
 
         this.email = email;
+    }
+    public void addCourse(Course course) {
+
+        if (course == null) {
+            throw new IllegalArgumentException("Curso invalido");
+        }
+
+        courses.add(course);
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
     }
 
     // Metodo toString

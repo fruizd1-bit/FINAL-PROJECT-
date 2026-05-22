@@ -63,4 +63,8 @@ public class Course {
 
         return finalGrade;
     }
+    @Override
+    public String toString() {
+        return "Curso: " + courseName;
+    }
 }

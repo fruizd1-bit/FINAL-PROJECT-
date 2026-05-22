@@ -4,6 +4,7 @@ import Dominio.Course;
 import Dominio.LabEvaluation;
 import Dominio.ProjectEvaluation;
 import Dominio.WrittenExam;
+import Dominio.Student;
 
 public class Main {
 
@@ -12,6 +13,14 @@ public class Main {
         // Crear curso
         Course programming = new Course("Programacion 1");
 
+        Student student1 = new Student(
+        	    "2025001",
+        	    "Fredy Ruiz",
+        	    "fredy@email.com"
+        	);
+
+        	student1.addCourse(programming);
+        	
         // Crear evaluaciones
         WrittenExam exam1 = new WrittenExam(
                 "Parcial 1",
@@ -48,5 +57,14 @@ public class Main {
                 "Nota Final: " +
                 programming.calculateFinalGrade()
         );
+   
+        System.out.println("\n===== ESTUDIANTE =====");
+        System.out.println(student1);
+
+        System.out.println("\n===== CURSOS DEL ESTUDIANTE =====");
+
+        for (Course course : student1.getCourses()) {
+        System.out.println(course);
+        }	
     }
 }

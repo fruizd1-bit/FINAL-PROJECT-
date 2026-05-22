@@ -6,11 +6,11 @@ import Dominio.Student;
 
 public class StudentManager {
 
-    // Lista donde se almacenarán los estudiantes
     private ArrayList<Student> students;
 
     // Constructor
     public StudentManager() {
+
         students = new ArrayList<>();
     }
 
@@ -18,31 +18,40 @@ public class StudentManager {
     public void addStudent(Student student) {
 
         if (student == null) {
-            throw new IllegalArgumentException("El estudiante no puede ser null");
+
+            throw new IllegalArgumentException(
+                    "El estudiante no puede ser null"
+            );
         }
 
         students.add(student);
     }
 
-    // Mostrar todos los estudiantes
+    // Mostrar estudiantes
     public void showStudents() {
 
         if (students.isEmpty()) {
-            System.out.println("No hay estudiantes registrados");
+
+            System.out.println(
+                    "No hay estudiantes registrados"
+            );
+
             return;
         }
 
         for (Student student : students) {
+
             System.out.println(student);
         }
     }
 
-    // Buscar estudiante por nombre
-    public Student searchStudent(String name) {
+    // Buscar estudiante por ID
+    public Student searchStudent(String id) {
 
         for (Student student : students) {
 
-            if (student.getName().equalsIgnoreCase(name)) {
+            if (student.getId().equals(id)) {
+
                 return student;
             }
         }
@@ -51,20 +60,23 @@ public class StudentManager {
     }
 
     // Eliminar estudiante
-    public boolean removeStudent(String name) {
+    public boolean removeStudent(String id) {
 
-        Student student = searchStudent(name);
+        Student student = searchStudent(id);
 
         if (student != null) {
+
             students.remove(student);
+
             return true;
         }
 
         return false;
     }
 
-    // Obtener lista completa
+    // Obtener lista
     public ArrayList<Student> getStudents() {
+
         return students;
     }
 }

@@ -6,7 +6,7 @@ public class LabEvaluation extends Evaluation {
 
     public LabEvaluation(String name, double percentage, double score) {
         super(name, percentage);
-        this.score = score;
+        setScore(score);
     }
 
     public double getScore() {

@@ -6,8 +6,9 @@ public abstract class Evaluation {
     protected double percentage;
 
     public Evaluation(String name, double percentage) {
-        this.name = name;
-        this.percentage = percentage;
+    	setName(name);
+    	setPercentage(percentage);
+        
     }
 
     public String getName() {
@@ -19,7 +20,12 @@ public abstract class Evaluation {
     }
 
     public void setName(String name) {
+    	if(name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nombre invalido");
+        }
+
         this.name = name;
+      
     }
 
     public void setPercentage(double percentage) {

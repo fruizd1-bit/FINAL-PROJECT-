@@ -8,16 +8,25 @@ public class Course {
     private ArrayList<Evaluation> evaluations;
 
     public Course(String courseName) {
-        this.courseName = courseName;
+    	setCourseName(courseName);//validacion de coursename
         this.evaluations = new ArrayList<>();
     }
 
     public String getCourseName() {
         return courseName;
     }
+    
+    public ArrayList<Evaluation> getEvaluations() {
+        return evaluations;
+    }
 
     public void setCourseName(String courseName) {
+    	if(courseName == null || courseName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nombre del curso invalido");
+        }
+
         this.courseName = courseName;
+     
     }
 
     // Agregar evaluación

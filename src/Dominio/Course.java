@@ -15,20 +15,24 @@ public class Course {
         this.evaluations = new ArrayList<>();
     }
 
-    // Getter nombre del curso
+    // Getter nombre curso
     public String getCourseName() {
+
         return courseName;
     }
 
     // Getter evaluaciones
     public ArrayList<Evaluation> getEvaluations() {
+
         return evaluations;
     }
 
-    // Setter nombre del curso
+    // Setter nombre curso
     public void setCourseName(String courseName) {
 
-        if (courseName == null || courseName.trim().isEmpty()) {
+        if (courseName == null ||
+            courseName.trim().isEmpty()) {
+
             throw new IllegalArgumentException(
                     "Nombre del curso invalido"
             );
@@ -37,32 +41,29 @@ public class Course {
         this.courseName = courseName;
     }
 
-    // Obtener porcentaje total acumulado
-    public double getTotalPercentage() {
-
-        double total = 0;
-
-        for (Evaluation evaluation : evaluations) {
-            total += evaluation.getPercentage();
-        }
-
-        return total;
-    }
-
-    // Agregar evaluación
+    // Agregar evaluacion
     public void addEvaluation(Evaluation evaluation) {
 
         if (evaluation == null) {
+
             throw new IllegalArgumentException(
                     "La evaluacion no puede ser null"
             );
         }
 
-        // Validar que no pase de 100%
-        if (getTotalPercentage() + evaluation.getPercentage() > 100) {
+        double totalPercentage = 0;
+
+        for (Evaluation e : evaluations) {
+
+            totalPercentage += e.getPercentage();
+        }
+
+        // Validar porcentaje maximo
+        if (totalPercentage +
+            evaluation.getPercentage() > 100) {
 
             throw new IllegalArgumentException(
-                    "El porcentaje total no puede superar 100%"
+                    "El porcentaje total excede 100%"
             );
         }
 
@@ -82,6 +83,7 @@ public class Course {
         }
 
         for (Evaluation evaluation : evaluations) {
+
             System.out.println(evaluation);
         }
     }
@@ -92,14 +94,106 @@ public class Course {
         double finalGrade = 0;
 
         for (Evaluation evaluation : evaluations) {
-            finalGrade += evaluation.calculateContribution();
+
+            finalGrade +=
+                    evaluation.calculateContribution();
         }
 
         return finalGrade;
     }
 
+    // Buscar evaluacion
+    public Evaluation searchEvaluation(String name) {
+
+        for (Evaluation evaluation : evaluations) {
+
+            if (evaluation.getName()
+                    .equalsIgnoreCase(name)) {
+
+                return evaluation;
+            }
+        }
+
+        return null;
+    }
+
+    // Eliminar evaluacion
+    public boolean removeEvaluation(String name) {
+
+        Evaluation evaluation =
+                searchEvaluation(name);
+
+        if (evaluation != null) {
+
+            evaluations.remove(evaluation);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    // Editar porcentaje evaluacion
+    public void editEvaluationPercentage(
+            String name,
+            double newPercentage
+    ) {
+
+        Evaluation evaluation =
+                searchEvaluation(name);
+
+        if (evaluation == null) {
+
+            throw new IllegalArgumentException(
+                    "Evaluacion no encontrada"
+            );
+        }
+
+        double totalPercentage = 0;
+
+        for (Evaluation e : evaluations) {
+
+            if (!e.getName()
+                    .equalsIgnoreCase(name)) {
+
+                totalPercentage +=
+                        e.getPercentage();
+            }
+        }
+
+        if (totalPercentage +
+            newPercentage > 100) {
+
+            throw new IllegalArgumentException(
+                    "El porcentaje total excede 100%"
+            );
+        }
+
+        evaluation.setPercentage(newPercentage);
+    }
+
+    // Editar nombre evaluacion
+    public void editEvaluationName(
+            String currentName,
+            String newName
+    ) {
+
+        Evaluation evaluation =
+                searchEvaluation(currentName);
+
+        if (evaluation == null) {
+
+            throw new IllegalArgumentException(
+                    "Evaluacion no encontrada"
+            );
+        }
+
+        evaluation.setName(newName);
+    }
+
     @Override
     public String toString() {
+
         return "Curso: " + courseName;
     }
 }

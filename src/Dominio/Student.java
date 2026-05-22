@@ -8,9 +8,10 @@ public class Student {
 
     // Constructor
     public Student(String id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+    	setId(id);
+        setName(name);
+        setEmail(email);
+       
     }
 
     // Getter ID
@@ -36,7 +37,7 @@ public class Student {
     // Setter Name
     public void setName(String name) {
 
-        if (name == null || name.isEmpty()) {
+    	if (name == null || name.isEmpty()){
             throw new IllegalArgumentException("Nombre invalido");
         }
 
@@ -51,7 +52,7 @@ public class Student {
     // Setter Email
     public void setEmail(String email) {
 
-        if (email == null || email.isEmpty()) {
+        if (email == null || !email.contains("@")) {
             throw new IllegalArgumentException("Correo invalido");
         }
 

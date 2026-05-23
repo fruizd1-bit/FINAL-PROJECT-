@@ -22,45 +22,145 @@ public class Main {
 
         StudentManager manager = new StudentManager();
         
-        FileManager.loadStudents(manager);
+        FileManager.loadData(manager);
         	
         
         Student selectedStudent = null;
         Course selectedCourse = null;
 
+        
+        		String adminUser = "umg";
+        		String adminPassword = "umg24";
+
+        		System.out.println("===== LOGIN =====");
+
+        		System.out.print("Usuario: ");
+        		String user = input.nextLine();
+
+        		System.out.print("Password: ");
+        		String password = input.nextLine();
+
+        		if (!user.equals(adminUser)
+        		        || !password.equals(adminPassword)) {
+
+        		    System.out.println("Acceso denegado");
+
+        		    input.close();
+
+        		    return;
+        		}
+
+        		System.out.println("Acceso concedido");
+        	
+        
         int option = 0;
 
         while (option != 14) {
 
-            System.out.println("\n========== MENU ==========");
+        			System.out.println(
+        			"\n╔════════════════════════════════════╗"
+        			);
 
-            System.out.println("1. Registrar estudiante");
-            System.out.println("2. Mostrar estudiantes");
-            System.out.println("3. Seleccionar estudiante por ID");
+        			System.out.println(
+        			"║         CAMPUS LITE UMG           ║"
+        			);
 
-            System.out.println("\n===== CURSOS =====");
+        			System.out.println(
+        			"╠════════════════════════════════════╣"
+        			);
 
-            System.out.println("4. Crear curso");
-            System.out.println("5. Mostrar cursos");
-            System.out.println("6. Seleccionar curso");
+        			System.out.println(
+        			"║           ESTUDIANTES             ║"
+        			);
 
-            System.out.println("\n===== EVALUACIONES =====");
+        			System.out.println(
+        			"║ 1. Registrar estudiante           ║"
+        			);
 
-            System.out.println("7. Agregar evaluacion");
-            System.out.println("8. Mostrar evaluaciones");
-            System.out.println("9. Buscar evaluacion");
-            System.out.println("10. Eliminar evaluacion");
-            System.out.println("11. Editar porcentaje evaluacion");
-            System.out.println("12. Editar nombre evaluacion");
+        			System.out.println(
+        			"║ 2. Mostrar estudiantes            ║"
+        			);
 
-            System.out.println("\n===== NOTAS =====");
+        			System.out.println(
+        			"║ 3. Seleccionar estudiante         ║"
+        			);
 
-            System.out.println("13. Calcular nota final");
+        			System.out.println(
+        			"║ 4. Editar estudiante              ║"
+        			);
 
-            System.out.println("\n14. Salir");
+        			System.out.println(
+        			"╠════════════════════════════════════╣"
+        			);
 
-            System.out.print("\nSeleccione una opcion: ");
+        			System.out.println(
+        			"║              CURSOS               ║"
+        			);
 
+        			System.out.println(
+        			"║ 5. Crear curso                    ║"
+        			);
+
+        			System.out.println(
+        			"║ 6. Mostrar cursos                 ║"
+        			);
+
+        			System.out.println(
+        			"║ 7. Seleccionar curso              ║"
+        			);
+
+        			System.out.println(
+        			"║ 8. Eliminar curso                 ║"
+        			);
+
+        			System.out.println(
+        			"╠════════════════════════════════════╣"
+        			);
+
+        			System.out.println(
+        			"║           EVALUACIONES            ║"
+        			);
+
+        			System.out.println(
+        			"║ 9. Agregar evaluacion             ║"
+        			);
+
+        			System.out.println(
+        			"║ 10. Mostrar evaluaciones          ║"
+        			);
+
+        			System.out.println(
+        			"║ 11. Editar evaluacion             ║"
+        			);
+
+        			System.out.println(
+        			"║ 12. Eliminar evaluacion           ║"
+        			);
+
+        			System.out.println(
+        			"╠════════════════════════════════════╣"
+        			);
+
+        			System.out.println(
+        			"║             REPORTES              ║"
+        			);
+
+        			System.out.println(
+        			"║ 13. Calcular nota final           ║"
+        			);
+
+        			System.out.println(
+        			"║ 14. Salir                         ║"
+        			);
+
+        			System.out.println(
+        			"╚════════════════════════════════════╝"
+        			);
+
+        			System.out.print(
+        			"Seleccione una opcion: "
+        			);
+        	
             option = input.nextInt();
             input.nextLine();
 
@@ -649,14 +749,11 @@ public class Main {
 
             // SALIR
             case 14:
-
+            	FileManager.saveData(manager);
                 System.out.println(
                         "Saliendo del sistema..."
                 );
-               
-                FileManager.saveStudents(manager);
-                		
-
+              
                 break;
 
             default:

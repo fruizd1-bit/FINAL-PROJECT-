@@ -12,9 +12,19 @@ public class Student {
     	setId(id);
         setName(name);
         setEmail(email);
-       
+
         this.courses = new ArrayList<>();
     }
+    		public void editStudent(
+    		        String newName,
+    		        String newEmail
+    		) {
+
+    		    setName(newName);
+
+    		    setEmail(newEmail);
+    		}
+    	
 
     // Getter ID
     public String getId() {
@@ -68,6 +78,27 @@ public class Student {
 
         courses.add(course);
     }
+  
+    		public boolean removeCourse(
+    		        String courseName
+    		) {
+
+    		    for (Course course : courses) {
+
+    		        if (
+    		                course.getCourseName()
+    		                        .equalsIgnoreCase(courseName)
+    		        ) {
+
+    		            courses.remove(course);
+
+    		            return true;
+    		        }
+    		    }
+
+    		    return false;
+    		}
+    	
 
     public ArrayList<Course> getCourses() {
         return courses;

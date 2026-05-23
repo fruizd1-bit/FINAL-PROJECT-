@@ -7,6 +7,7 @@ public class WrittenExam extends Evaluation {
     public WrittenExam(String name, double percentage, double score) {
         super(name, percentage);
         this.score = score;
+        
     }
 
     public double getScore() {

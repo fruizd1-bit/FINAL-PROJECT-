@@ -191,6 +191,71 @@ public class Course {
         evaluation.setName(newName);
     }
 
+ // Editar evaluacion completa
+ public void editEvaluation(
+         String currentName,
+         String newName,
+         double newPercentage,
+         double newScore
+ ) {
+
+     Evaluation evaluation =
+             searchEvaluation(currentName);
+
+     if (evaluation == null) {
+
+         throw new IllegalArgumentException(
+                 "Evaluacion no encontrada"
+         );
+     }
+
+     double currentPercentage =
+             evaluation.getPercentage();
+
+     double total = 0;
+
+     for (Evaluation e : evaluations) {
+
+         total += e.getPercentage();
+     }
+
+     total =
+             total
+             - currentPercentage
+             + newPercentage;
+
+     if (total > 100) {
+
+         throw new IllegalArgumentException(
+                 "El porcentaje total excede 100%"
+         );
+     }
+
+     evaluation.setName(newName);
+
+     evaluation.setPercentage(newPercentage);
+
+     // CAMBIAR NOTA
+     if (evaluation instanceof WrittenExam) {
+
+         ((WrittenExam) evaluation)
+                 .setScore(newScore);
+
+     } else if (
+             evaluation instanceof LabEvaluation
+     ) {
+
+         ((LabEvaluation) evaluation)
+                 .setScore(newScore);
+
+     } else if (
+             evaluation instanceof ProjectEvaluation
+     ) {
+
+         ((ProjectEvaluation) evaluation)
+                 .setScore(newScore);
+     }
+ }
     @Override
     public String toString() {
 

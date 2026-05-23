@@ -2,8 +2,9 @@ package servicio;
 
 
 
+import java.util.ArrayList;
+import Dominio.Career;
 import java.util.Scanner;
-
 import Dominio.Course;
 import Dominio.Evaluation;
 import Dominio.LabEvaluation;
@@ -24,7 +25,10 @@ public class Main {
         
         FileManager.loadData(manager);
         	
-        
+        		ArrayList<Career> careers =
+        		        new ArrayList<>();
+        				initializeCareers(careers);
+
         Student selectedStudent = null;
         Course selectedCourse = null;
 
@@ -98,19 +102,19 @@ public class Main {
         			);
 
         			System.out.println(
-        			"║ 5. Crear curso                    ║"
+        			"║ 5. Mostrar carreras                    ║"
         			);
 
         			System.out.println(
-        			"║ 6. Mostrar cursos                 ║"
+        			"║ 6. Asignar cursos                 ║"
         			);
 
         			System.out.println(
-        			"║ 7. Seleccionar curso              ║"
+        			"║ 7. Mostrar curso asignados            ║"
         			);
 
         			System.out.println(
-        			"║ 8. Eliminar curso                 ║"
+        			"║ 8. Seleccionar curso                 ║"
         			);
 
         			System.out.println(
@@ -166,540 +170,588 @@ public class Main {
 
             switch (option) {
 
-            // REGISTRAR ESTUDIANTE
-            case 1:
+         // REGISTRAR ESTUDIANTE
+         case 1:
 
-                try {
+             try {
 
-                    System.out.println("Ingrese ID:");
-                    String id = input.nextLine();
+                 System.out.println("Ingrese ID:");
+                 String id = input.nextLine();
 
-                    System.out.println("Ingrese nombre:");
-                    String name = input.nextLine();
+                 System.out.println("Ingrese nombre:");
+                 String name = input.nextLine();
 
-                    System.out.println("Ingrese email:");
-                    String email = input.nextLine();
+                 System.out.println("Ingrese email:");
+                 String email = input.nextLine();
 
-                    Student student = new Student(id, name, email);
+                 Student student = new Student(id, name, email);
 
-                    manager.addStudent(student);
+                 manager.addStudent(student);
 
-                    System.out.println(
-                            "Estudiante registrado correctamente"
-                    );
+                 System.out.println("Estudiante registrado correctamente");
 
-                } catch (IllegalArgumentException e) {
+             } catch (IllegalArgumentException e) {
 
-                    System.out.println(
-                            "Error: " + e.getMessage()
-                    );
-                }
+                 System.out.println("Error: " + e.getMessage());
+             }
 
-                break;
+             break;
 
-            // MOSTRAR ESTUDIANTES
-            case 2:
 
-                System.out.println(
-                        "\n===== ESTUDIANTES ====="
-                );
+         // MOSTRAR ESTUDIANTES
+         case 2:
 
-                manager.showStudents();
+             System.out.println("\n===== ESTUDIANTES =====");
 
-                break;
+             manager.showStudents();
 
-            // SELECCIONAR ESTUDIANTE
-            case 3:
+             break;
 
-                System.out.println(
-                        "Ingrese ID del estudiante:"
-                );
 
-                String searchId = input.nextLine();
+         // SELECCIONAR ESTUDIANTE
+         case 3:
 
-                selectedStudent =
-                        manager.searchStudent(searchId);
+             System.out.println("Ingrese ID del estudiante:");
 
-                // Limpiar curso seleccionado
-                selectedCourse = null;
+             String searchId = input.nextLine();
 
-                if (selectedStudent != null) {
+             selectedStudent = manager.searchStudent(searchId);
 
-                    System.out.println(
-                            "Estudiante seleccionado:"
-                    );
+             selectedCourse = null;
 
-                    System.out.println(selectedStudent);
+             if (selectedStudent != null) {
 
-                } else {
+                 System.out.println("Estudiante seleccionado:");
+                 System.out.println(selectedStudent);
 
-                    System.out.println(
-                            "Estudiante no encontrado"
-                    );
-                }
+             } else {
 
-                break;
+                 System.out.println("Estudiante no encontrado");
+             }
 
-            // CREAR CURSO
-            case 4:
+             break;
 
-                if (selectedStudent == null) {
 
-                    System.out.println(
-                            "Seleccione un estudiante primero"
-                    );
+         // EDITAR ESTUDIANTE
+         case 4:
 
-                    break;
-                }
+             if (selectedStudent == null) {
 
-                try {
+                 System.out.println("Seleccione un estudiante primero");
 
-                    System.out.println(
-                            "Ingrese nombre del curso:"
-                    );
+                 break;
+             }
 
-                    String courseName =
-                            input.nextLine();
+             try {
 
-                    Course course =
-                            new Course(courseName);
+                 System.out.println("Ingrese nuevo nombre:");
+                 String newName = input.nextLine();
 
-                    selectedStudent.addCourse(course);
+                 System.out.println("Ingrese nuevo email:");
+                 String newEmail = input.nextLine();
 
-                    System.out.println(
-                            "Curso agregado correctamente"
-                    );
+                 selectedStudent.editStudent(newName, newEmail);
 
-                } catch (IllegalArgumentException e) {
+                 System.out.println("Estudiante actualizado correctamente");
 
-                    System.out.println(
-                            "Error: " + e.getMessage()
-                    );
-                }
+             } catch (IllegalArgumentException e) {
 
-                break;
+                 System.out.println("Error: " + e.getMessage());
+             }
 
-            // MOSTRAR CURSOS
-            case 5:
+             break;
+          
+          // MOSTRAR CARRERAS
+          case 5:
 
-                if (selectedStudent == null) {
+              System.out.println(
+                      "\n===== CARRERAS ====="
+              );
 
-                    System.out.println(
-                            "Seleccione un estudiante primero"
-                    );
+              for (Career career : careers) {
 
-                    break;
-                }
+                  System.out.println(
+                          "- " + career.getName()
+                  );
+              }
 
-                System.out.println(
-                        "\n===== CURSOS ====="
-                );
+              break;
 
-                if (selectedStudent.getCourses().isEmpty()) {
 
-                    System.out.println(
-                            "No hay cursos registrados"
-                    );
+          // ASIGNAR CURSO
+          case 6:
 
-                } else {
+              if (selectedStudent == null) {
 
-                    for (Course course :
-                            selectedStudent.getCourses()) {
+                  System.out.println(
+                          "Seleccione un estudiante primero"
+                  );
 
-                        System.out.println(course);
-                    }
-                }
+                  break;
+              }
 
-                break;
+              System.out.println(
+                      "\n===== CARRERAS ====="
+              );
 
-            // SELECCIONAR CURSO
-            case 6:
+              for (Career career : careers) {
 
-                if (selectedStudent == null) {
+                  System.out.println(
+                          "- " + career.getName()
+                  );
+              }
 
-                    System.out.println(
-                            "Seleccione un estudiante primero"
-                    );
+              System.out.println(
+                      "Ingrese nombre de la carrera:"
+              );
 
-                    break;
-                }
+              String careerName =
+                      input.nextLine();
 
-                if (selectedStudent.getCourses().isEmpty()) {
+              Career selectedCareer = null;
 
-                    System.out.println(
-                            "El estudiante no tiene cursos"
-                    );
+              for (Career career : careers) {
 
-                    break;
-                }
+                  if (
+                          career.getName()
+                                  .equalsIgnoreCase(
+                                          careerName
+                                  )
+                  ) {
 
-                System.out.println(
-                        "\n===== CURSOS ====="
-                );
+                      selectedCareer = career;
+                  }
+              }
 
-                for (Course course :
-                        selectedStudent.getCourses()) {
+              if (selectedCareer == null) {
 
-                    System.out.println(
-                            course.getCourseName()
-                    );
-                }
+                  System.out.println(
+                          "Carrera no encontrada"
+                  );
 
-                System.out.println(
-                        "Ingrese nombre del curso:"
-                );
+                  break;
+              }
 
-                String courseNameSearch =
-                        input.nextLine();
+              System.out.println(
+                      "\n===== CURSOS DISPONIBLES ====="
+              );
 
-                selectedCourse = null;
+              selectedCareer.showCourses();
 
-                for (Course course :
-                        selectedStudent.getCourses()) {
+              System.out.println(
+                      "Ingrese curso a asignar:"
+              );
 
-                    if (course.getCourseName()
-                            .equalsIgnoreCase(
-                                    courseNameSearch
-                            )) {
+              String courseName =
+                      input.nextLine();
 
-                        selectedCourse = course;
-                    }
-                }
+              boolean assigned = false;
 
-                if (selectedCourse != null) {
+              for (
+                      Course course :
+                      selectedCareer.getCourses()
+              ) {
 
-                    System.out.println(
-                            "Curso seleccionado:"
-                    );
+                  if (
+                          course.getCourseName()
+                                  .equalsIgnoreCase(
+                                          courseName
+                                  )
+                  ) {
 
-                    System.out.println(selectedCourse);
+                      selectedStudent.addCourse(
+                              new Course(
+                                      course.getCourseName()
+                              )
+                      );
 
-                } else {
+                      assigned = true;
 
-                    System.out.println(
-                            "Curso no encontrado"
-                    );
-                }
+                      break;
+                  }
+              }
 
-                break;
+              if (assigned) {
 
-            // AGREGAR EVALUACION
-            case 7:
+                  System.out.println(
+                          "Curso asignado correctamente"
+                  );
 
-                if (selectedCourse == null) {
+              } else {
 
-                    System.out.println(
-                            "Seleccione un curso primero"
-                    );
+                  System.out.println(
+                          "Curso no encontrado"
+                  );
+              }
 
-                    break;
-                }
+              break;
 
-                try {
 
-                    System.out.println(
-                            "\nTipos de evaluacion:"
-                    );
+          // MOSTRAR CURSOS ASIGNADOS
+          case 7:
 
-                    System.out.println(
-                            "1. Examen escrito"
-                    );
+              if (selectedStudent == null) {
 
-                    System.out.println(
-                            "2. Laboratorio"
-                    );
+                  System.out.println(
+                          "Seleccione un estudiante primero"
+                  );
 
-                    System.out.println(
-                            "3. Proyecto"
-                    );
+                  break;
+              }
 
-                    int type = input.nextInt();
-                    input.nextLine();
+              System.out.println(
+                      "\n===== CURSOS ASIGNADOS ====="
+              );
 
-                    System.out.println(
-                            "Ingrese nombre de la evaluacion:"
-                    );
+              if (
+                      selectedStudent.getCourses()
+                              .isEmpty()
+              ) {
 
-                    String evalName =
-                            input.nextLine();
+                  System.out.println(
+                          "No hay cursos asignados"
+                  );
 
-                    System.out.println(
-                            "Ingrese porcentaje:"
-                    );
+              } else {
 
-                    double percentage =
-                            input.nextDouble();
+                  for (
+                          Course course :
+                          selectedStudent.getCourses()
+                  ) {
 
-                    System.out.println(
-                            "Ingrese nota:"
-                    );
+                      System.out.println(course);
+                  }
+              }
 
-                    double score =
-                            input.nextDouble();
+              break;
 
-                    input.nextLine();
 
-                    Evaluation evaluation = null;
+          // SELECCIONAR CURSO
+          case 8:
 
-                    switch (type) {
+              if (selectedStudent == null) {
 
-                    case 1:
+                  System.out.println(
+                          "Seleccione un estudiante primero"
+                  );
 
-                        evaluation =
-                                new WrittenExam(
-                                        evalName,
-                                        percentage,
-                                        score
-                                );
+                  break;
+              }
 
-                        break;
+              if (
+                      selectedStudent.getCourses()
+                              .isEmpty()
+              ) {
 
-                    case 2:
+                  System.out.println(
+                          "No hay cursos asignados"
+                  );
 
-                        evaluation =
-                                new LabEvaluation(
-                                        evalName,
-                                        percentage,
-                                        score
-                                );
+                  break;
+              }
 
-                        break;
+              System.out.println(
+                      "\n===== CURSOS ====="
+              );
 
-                    case 3:
+              for (
+                      Course course :
+                      selectedStudent.getCourses()
+              ) {
 
-                        evaluation =
-                                new ProjectEvaluation(
-                                        evalName,
-                                        percentage,
-                                        score
-                                );
+                  System.out.println(
+                          course.getCourseName()
+                  );
+              }
 
-                        break;
+              System.out.println(
+                      "Ingrese nombre del curso:"
+              );
 
-                    default:
+              String courseSearch =
+                      input.nextLine();
 
-                        System.out.println(
-                                "Tipo invalido"
-                        );
+              selectedCourse = null;
 
-                        break;
-                    }
+              for (
+                      Course course :
+                      selectedStudent.getCourses()
+              ) {
 
-                    if (evaluation != null) {
+                  if (
+                          course.getCourseName()
+                                  .equalsIgnoreCase(
+                                          courseSearch
+                                  )
+                  ) {
 
-                        selectedCourse.addEvaluation(
-                                evaluation
-                        );
+                      selectedCourse = course;
+                  }
+              }
 
-                        System.out.println(
-                                "Evaluacion agregada correctamente"
-                        );
-                    }
+              if (selectedCourse != null) {
 
-                } catch (IllegalArgumentException e) {
+                  System.out.println(
+                          "Curso seleccionado"
+                  );
 
-                    System.out.println(
-                            "Error: " + e.getMessage()
-                    );
-                }
+              } else {
 
-                break;
+                  System.out.println(
+                          "Curso no encontrado"
+                  );
+              }
 
-            // MOSTRAR EVALUACIONES
-            case 8:
+              break;
 
-                if (selectedCourse == null) {
+            		// AGREGAR EVALUACION
+            		case 9:
 
-                    System.out.println(
-                            "Seleccione un curso primero"
-                    );
+            		    if (selectedCourse == null) {
 
-                    break;
-                }
+            		        System.out.println(
+            		                "Seleccione un curso primero"
+            		        );
 
-                System.out.println(
-                        "\n===== EVALUACIONES ====="
-                );
+            		        break;
+            		    }
 
-                selectedCourse.showEvaluations();
+            		    try {
 
-                break;
+            		        System.out.println(
+            		                "\nTipos de evaluacion:"
+            		        );
 
-            // BUSCAR EVALUACION
-            case 9:
+            		        System.out.println(
+            		                "1. Examen escrito"
+            		        );
 
-                if (selectedCourse == null) {
+            		        System.out.println(
+            		                "2. Laboratorio"
+            		        );
 
-                    System.out.println(
-                            "Seleccione un curso primero"
-                    );
+            		        System.out.println(
+            		                "3. Proyecto"
+            		        );
 
-                    break;
-                }
+            		        int type = input.nextInt();
+            		        input.nextLine();
 
-                System.out.println(
-                        "Ingrese nombre de la evaluacion:"
-                );
+            		        System.out.println(
+            		                "Ingrese nombre de la evaluacion:"
+            		        );
 
-                String searchEvaluation =
-                        input.nextLine();
+            		        String evalName =
+            		                input.nextLine();
 
-                Evaluation found =
-                        selectedCourse.searchEvaluation(
-                                searchEvaluation
-                        );
+            		        System.out.println(
+            		                "Ingrese porcentaje:"
+            		        );
 
-                if (found != null) {
+            		        double percentage =
+            		                input.nextDouble();
 
-                    System.out.println(
-                            "Evaluacion encontrada:"
-                    );
+            		        System.out.println(
+            		                "Ingrese nota:"
+            		        );
 
-                    System.out.println(found);
+            		        double score =
+            		                input.nextDouble();
 
-                } else {
+            		        input.nextLine();
 
-                    System.out.println(
-                            "Evaluacion no encontrada"
-                    );
-                }
+            		        Evaluation evaluation = null;
 
-                break;
+            		        switch (type) {
 
-            // ELIMINAR EVALUACION
-            case 10:
+            		        case 1:
 
-                if (selectedCourse == null) {
+            		            evaluation =
+            		                    new WrittenExam(
+            		                            evalName,
+            		                            percentage,
+            		                            score
+            		                    );
 
-                    System.out.println(
-                            "Seleccione un curso primero"
-                    );
+            		            break;
 
-                    break;
-                }
+            		        case 2:
 
-                System.out.println(
-                        "Ingrese evaluacion a eliminar:"
-                );
+            		            evaluation =
+            		                    new LabEvaluation(
+            		                            evalName,
+            		                            percentage,
+            		                            score
+            		                    );
 
-                String removeName =
-                        input.nextLine();
+            		            break;
 
-                boolean removed =
-                        selectedCourse.removeEvaluation(
-                                removeName
-                        );
+            		        case 3:
 
-                if (removed) {
+            		            evaluation =
+            		                    new ProjectEvaluation(
+            		                            evalName,
+            		                            percentage,
+            		                            score
+            		                    );
 
-                    System.out.println(
-                            "Evaluacion eliminada"
-                    );
+            		            break;
 
-                } else {
+            		        default:
 
-                    System.out.println(
-                            "Evaluacion no encontrada"
-                    );
-                }
+            		            System.out.println(
+            		                    "Tipo invalido"
+            		            );
 
-                break;
+            		            break;
+            		        }
 
-            // EDITAR PORCENTAJE
-            case 11:
+            		        if (evaluation != null) {
 
-                if (selectedCourse == null) {
+            		            selectedCourse.addEvaluation(
+            		                    evaluation
+            		            );
 
-                    System.out.println(
-                            "Seleccione un curso primero"
-                    );
+            		            System.out.println(
+            		                    "Evaluacion agregada correctamente"
+            		            );
+            		        }
 
-                    break;
-                }
+            		    } catch (IllegalArgumentException e) {
 
-                try {
+            		        System.out.println(
+            		                "Error: "
+            		                + e.getMessage()
+            		        );
+            		    }
 
-                    System.out.println(
-                            "Ingrese evaluacion:"
-                    );
+            		    break;
 
-                    String evaluationName =
-                            input.nextLine();
 
-                    System.out.println(
-                            "Ingrese nuevo porcentaje:"
-                    );
+            		// MOSTRAR EVALUACIONES
+            		case 10:
 
-                    double newPercentage =
-                            input.nextDouble();
+            		    if (selectedCourse == null) {
 
-                    input.nextLine();
+            		        System.out.println(
+            		                "Seleccione un curso primero"
+            		        );
 
-                    selectedCourse.editEvaluationPercentage(
-                            evaluationName,
-                            newPercentage
-                    );
+            		        break;
+            		    }
 
-                    System.out.println(
-                            "Porcentaje actualizado"
-                    );
+            		    System.out.println(
+            		            "\n===== EVALUACIONES ====="
+            		    );
 
-                } catch (IllegalArgumentException e) {
+            		    selectedCourse.showEvaluations();
 
-                    System.out.println(
-                            "Error: "
-                            + e.getMessage()
-                    );
-                }
+            		    break;
 
-                break;
+            		 // EDITAR EVALUACION
+            		 case 11:
 
-            // EDITAR NOMBRE
-            case 12:
+            		     if (selectedCourse == null) {
 
-                if (selectedCourse == null) {
+            		         System.out.println(
+            		                 "Seleccione un curso primero"
+            		         );
 
-                    System.out.println(
-                            "Seleccione un curso primero"
-                    );
+            		         break;
+            		     }
 
-                    break;
-                }
+            		     try {
 
-                try {
+            		         System.out.println(
+            		                 "Ingrese nombre actual:"
+            		         );
 
-                    System.out.println(
-                            "Ingrese nombre actual:"
-                    );
+            		         String currentName =
+            		                 input.nextLine();
 
-                    String currentName =
-                            input.nextLine();
+            		         System.out.println(
+            		                 "Ingrese nuevo nombre:"
+            		         );
 
-                    System.out.println(
-                            "Ingrese nuevo nombre:"
-                    );
+            		         String newName =
+            		                 input.nextLine();
 
-                    String newName =
-                            input.nextLine();
+            		         System.out.println(
+            		                 "Ingrese nuevo porcentaje:"
+            		         );
 
-                    selectedCourse.editEvaluationName(
-                            currentName,
-                            newName
-                    );
+            		         double newPercentage =
+            		                 input.nextDouble();
 
-                    System.out.println(
-                            "Nombre actualizado"
-                    );
+            		         System.out.println(
+            		                 "Ingrese nueva nota:"
+            		         );
 
-                } catch (IllegalArgumentException e) {
+            		         double newScore =
+            		                 input.nextDouble();
 
-                    System.out.println(
-                            "Error: "
-                            + e.getMessage()
-                    );
-                }
+            		         input.nextLine();
 
-                break;
+            		         selectedCourse.editEvaluation(
+            		                 currentName,
+            		                 newName,
+            		                 newPercentage,
+            		                 newScore
+            		         );
+
+            		         System.out.println(
+            		                 "Evaluacion actualizada correctamente"
+            		         );
+
+            		     } catch (IllegalArgumentException e) {
+
+            		         System.out.println(
+            		                 "Error: "
+            		                 + e.getMessage()
+            		         );
+            		     }
+
+            		 break;
+            		 
+            		// ELIMINAR EVALUACION
+            		case 12:
+
+            		    if (selectedCourse == null) {
+
+            		        System.out.println(
+            		                "Seleccione un curso primero"
+            		        );
+
+            		        break;
+            		    }
+
+            		    System.out.println(
+            		            "Ingrese evaluacion a eliminar:"
+            		    );
+
+            		    String removeName =
+            		            input.nextLine();
+
+            		    boolean removed =
+            		            selectedCourse.removeEvaluation(
+            		                    removeName
+            		            );
+
+            		    if (removed) {
+
+            		        System.out.println(
+            		                "Evaluacion eliminada"
+            		        );
+
+            		    } else {
+
+            		        System.out.println(
+            		                "Evaluacion no encontrada"
+            		        );
+            		    }
+
+            		    break;
+            		
 
             // CALCULAR NOTA FINAL
             case 13:
@@ -766,4 +818,148 @@ public class Main {
 
         input.close();
     }
+    		public static void initializeCareers(
+    		        ArrayList<Career> careers
+    		) {
+
+    		    // INGENIERIA EN SISTEMAS
+    		    Career systems =
+    		            new Career(
+    		                    "Ingenieria en Sistemas"
+    		            );
+
+    		    systems.addCourse(
+    		            new Course("Programacion 1")
+    		    );
+
+    		    systems.addCourse(
+    		            new Course("Base de Datos")
+    		    );
+
+    		    systems.addCourse(
+    		            new Course("Redes")
+    		    );
+
+    		    systems.addCourse(
+    		            new Course("Matematica Discreta")
+    		    );
+
+    		    systems.addCourse(
+    		            new Course("Algoritmos")
+    		    );
+
+    		    careers.add(systems);
+
+    		    // INGENIERIA INDUSTRIAL
+    		    Career industrial =
+    		            new Career(
+    		                    "Ingenieria Industrial"
+    		            );
+
+    		    industrial.addCourse(
+    		            new Course("Fisica")
+    		    );
+
+    		    industrial.addCourse(
+    		            new Course("Calculo")
+    		    );
+
+    		    industrial.addCourse(
+    		            new Course("Produccion")
+    		    );
+
+    		    industrial.addCourse(
+    		            new Course("Estadistica")
+    		    );
+
+    		    industrial.addCourse(
+    		            new Course("Logistica")
+    		    );
+
+    		    careers.add(industrial);
+
+    		    // ADMINISTRACION
+    		    Career administration =
+    		            new Career(
+    		                    "Administracion"
+    		            );
+
+    		    administration.addCourse(
+    		            new Course("Contabilidad")
+    		    );
+
+    		    administration.addCourse(
+    		            new Course("Marketing")
+    		    );
+
+    		    administration.addCourse(
+    		            new Course("Finanzas")
+    		    );
+
+    		    administration.addCourse(
+    		            new Course("Economia")
+    		    );
+
+    		    administration.addCourse(
+    		            new Course("Recursos Humanos")
+    		    );
+
+    		    careers.add(administration);
+
+    		    // DERECHO
+    		    Career law =
+    		            new Career(
+    		                    "Derecho"
+    		            );
+
+    		    law.addCourse(
+    		            new Course("Derecho Penal")
+    		    );
+
+    		    law.addCourse(
+    		            new Course("Derecho Civil")
+    		    );
+
+    		    law.addCourse(
+    		            new Course("Constitucion")
+    		    );
+
+    		    law.addCourse(
+    		            new Course("Derecho Laboral")
+    		    );
+
+    		    law.addCourse(
+    		            new Course("Derecho Mercantil")
+    		    );
+
+    		    careers.add(law);
+
+    		    // ARQUITECTURA
+    		    Career architecture =
+    		            new Career(
+    		                    "Arquitectura"
+    		            );
+
+    		    architecture.addCourse(
+    		            new Course("Diseno")
+    		    );
+
+    		    architecture.addCourse(
+    		            new Course("AutoCAD")
+    		    );
+
+    		    architecture.addCourse(
+    		            new Course("Construccion")
+    		    );
+
+    		    architecture.addCourse(
+    		            new Course("Dibujo Tecnico")
+    		    );
+
+    		    architecture.addCourse(
+    		            new Course("Urbanismo")
+    		    );
+
+    		    careers.add(architecture);
+    		}
 }

@@ -11,6 +11,8 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class MainFrame extends JFrame {
@@ -91,9 +93,9 @@ public class MainFrame extends JFrame {
 
 		lblNewLabel_3.setIcon(new ImageIcon(scaledImgEstudiante));
 		
-		JButton btnNewButtonEstudiantes = new JButton("Estudiantes");
-		btnNewButtonEstudiantes.setBounds(46, 106, 118, 28);
-		panel.add(btnNewButtonEstudiantes);
+		JButton btnNewButtonStudents = new JButton("Estudiantes");
+		btnNewButtonStudents.setBounds(46, 106, 118, 28);
+		panel.add(btnNewButtonStudents);
 		
 		
 		
@@ -113,9 +115,9 @@ public class MainFrame extends JFrame {
 		
 		
 		
-		JButton btnNewButtonCurso = new JButton("Curso");
-		btnNewButtonCurso.setBounds(46, 184, 118, 28);
-		panel.add(btnNewButtonCurso);
+		JButton btnNewButtonCourse = new JButton("Curso");
+		btnNewButtonCourse.setBounds(46, 184, 118, 28);
+		panel.add(btnNewButtonCourse);
 		
 		
 		
@@ -137,9 +139,13 @@ public class MainFrame extends JFrame {
 		
 		
 		
-		JButton btnNewButtonEvaluaciones = new JButton("Evaluaciones");
-		btnNewButtonEvaluaciones.setBounds(46, 250, 118, 28);
-		panel.add(btnNewButtonEvaluaciones);
+		JButton btnNewButtonEvaluations = new JButton("Evaluaciones");
+		btnNewButtonEvaluations.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButtonEvaluations.setBounds(46, 250, 118, 28);
+		panel.add(btnNewButtonEvaluations);
 		
 		
 		
@@ -160,9 +166,9 @@ public class MainFrame extends JFrame {
 		);
 		lblNewLabel_6.setIcon(new ImageIcon(scaledImgReportes));
 		
-		JButton btnNewButtonReportes = new JButton("Reportes");
-		btnNewButtonReportes.setBounds(46, 314, 118, 28);
-		panel.add(btnNewButtonReportes);
+		JButton btnNewButtonReports = new JButton("Reportes");
+		btnNewButtonReports.setBounds(46, 314, 118, 28);
+		panel.add(btnNewButtonReports);
 		
 		
 		

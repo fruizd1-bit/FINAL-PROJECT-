@@ -16,15 +16,24 @@ public class StudentManager {
 
     // Agregar estudiante
     public void addStudent(Student student) {
+    	
+    	   if (student == null) {
 
-        if (student == null) {
+    	        throw new IllegalArgumentException(
+    	                "El estudiante no puede ser null"
+    	        );
+    	    }
 
-            throw new IllegalArgumentException(
-                    "El estudiante no puede ser null"
-            );
-        }
+    	    if (searchStudent(student.getId()) != null) {
 
-        students.add(student);
+    	        throw new IllegalArgumentException(
+    	                "El ID ya existe"
+    	        );
+    	    }
+
+    	    students.add(student);
+
+       
     }
 
     // Mostrar estudiantes

@@ -1,5 +1,10 @@
 package ui;
 
+import Dominio.Student;
+import servicio.StudentManager;
+import servicio.FileManager;
+import javax.swing.JOptionPane;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -33,6 +38,8 @@ public class StudentForm extends JFrame {
 	private JButton btnEditEstudent;
 	private JButton btnDeleteStudent;
 	private JButton btnClearFields;
+	private StudentManager manager;
+	private DefaultTableModel model;
 	
 
 	/**
@@ -57,6 +64,10 @@ public class StudentForm extends JFrame {
 	public StudentForm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 566);
+		//integracion de los servicios
+		manager = new StudentManager();
+		FileManager.loadData(manager);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,22 +102,12 @@ public class StudentForm extends JFrame {
 		panel_1.add(tableStudents);
 		tableStudents.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		tableStudents.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"ID", "Nombre", "Email"
-			}
+				new Object[][] {},
+			    new String[] {
+			        "ID", "Nombre", "Email"
+			    }
+				
+				
 		));
 		tableStudents.getColumnModel().getColumn(0).setPreferredWidth(92);
 		tableStudents.getColumnModel().getColumn(0).setMinWidth(30);
@@ -114,6 +115,9 @@ public class StudentForm extends JFrame {
 		tableStudents.getColumnModel().getColumn(1).setMinWidth(30);
 		tableStudents.getColumnModel().getColumn(2).setPreferredWidth(165);
 		tableStudents.getColumnModel().getColumn(2).setMinWidth(30);
+		model = (DefaultTableModel) tableStudents.getModel();
+		refreshTable();
+		
 		
 		lblID = new JLabel("ID");
 		lblID.setFont(new Font("Arial Black", Font.PLAIN, 14));
@@ -186,4 +190,21 @@ public class StudentForm extends JFrame {
 		
 
 	}
+	// metodo para refresh table
+	private void refreshTable() {
+
+	    model.setRowCount(0);
+
+	    for (Student student : manager.getStudents()) {
+
+	        model.addRow(new Object[] {
+
+	                student.getId(),
+	                student.getName(),
+	                student.getEmail()
+	        });
+	    }
+	}
+	
+	
 }

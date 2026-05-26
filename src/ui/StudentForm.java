@@ -159,30 +159,190 @@ public class StudentForm extends JFrame {
 		panel_2.setLayout(null);
 		
 		btnAddStudent = new JButton("Agregar");
+		
+		btnAddStudent.addActionListener(new ActionListener() {
+//metodo para conectar el boton agregar estudiante
+		    public void actionPerformed(ActionEvent e) {
+
+		        try {
+
+		            Student student = new Student(
+
+		                    textID.getText(),
+		                    textName.getText(),
+		                    textEmail.getText()
+		            );
+
+		            manager.addStudent(student);
+
+		            FileManager.saveData(manager);
+
+		            refreshTable();
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Estudiante agregado correctamente"
+		            );
+
+		        } catch (IllegalArgumentException ex) {
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    ex.getMessage()
+		            );
+		        }
+		    }
+		});
+		
+		
 		btnAddStudent.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		btnAddStudent.setBounds(32, 11, 110, 40);
 		panel_2.add(btnAddStudent);
 		
 		btnSearchStudent = new JButton("Buscar");
+		//metodo para unir logica con boton buscar
+		btnSearchStudent.addActionListener(new ActionListener() {
+
+		    public void actionPerformed(ActionEvent e) {
+
+		        String id = textID.getText();
+
+		        Student student = manager.searchStudent(id);
+
+		        if (student != null) {
+
+		            textName.setText(student.getName());
+
+		            textEmail.setText(student.getEmail());
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Estudiante encontrado"
+		            );
+
+		        } else {
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Estudiante no encontrado"
+		            );
+		        }
+		    }
+		});
+		
+		
 		btnSearchStudent.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		btnSearchStudent.setBounds(182, 11, 110, 40);
 		panel_2.add(btnSearchStudent);
 		
 		btnEditEstudent = new JButton("Editar");
+		
+		btnEditEstudent.addActionListener(new ActionListener() {
+//metodo para conectar la logica con el boton editar
+		    public void actionPerformed(ActionEvent e) {
+
+		        Student student =
+		                manager.searchStudent(
+		                        textID.getText()
+		                );
+
+		        if (student != null) {
+
+		            try {
+
+		                student.editStudent(
+
+		                        textName.getText(),
+
+		                        textEmail.getText()
+		                );
+
+		                FileManager.saveData(manager);
+
+		                refreshTable();
+
+		                JOptionPane.showMessageDialog(
+		                        null,
+		                        "Estudiante actualizado"
+		                );
+
+		            } catch (IllegalArgumentException ex) {
+
+		                JOptionPane.showMessageDialog(
+		                        null,
+		                        ex.getMessage()
+		                );
+		            }
+
+		        } else {
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Estudiante no encontrado"
+		            );
+		        }
+		    }
+		});
+		
+		
 		btnEditEstudent.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		btnEditEstudent.setBounds(329, 11, 110, 40);
 		panel_2.add(btnEditEstudent);
 		
 		btnDeleteStudent = new JButton("Eliminar");
+		
 		btnDeleteStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
+//metodo para unir la logica con el boton eliminar
+		    public void actionPerformed(ActionEvent e) {
+
+		        String id = textID.getText();
+
+		        boolean removed =
+		                manager.removeStudent(id);
+
+		        if (removed) {
+
+		            FileManager.saveData(manager);
+
+		            refreshTable();
+
+		            textID.setText("");
+		            textName.setText("");
+		            textEmail.setText("");
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Estudiante eliminado"
+		            );
+
+		        } else {
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Estudiante no encontrado"
+		            );
+		        }
+		    }
 		});
+		
+		
+		
 		btnDeleteStudent.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		btnDeleteStudent.setBounds(469, 11, 110, 40);
 		panel_2.add(btnDeleteStudent);
 		
 		btnClearFields = new JButton("Limpiar");
+		
+		btnClearFields.addActionListener(new ActionListener() {
+//metodo para el boton limpiar
+		    public void actionPerformed(ActionEvent e) {
+
+		        textID.setText("");
+		        textName.setText("");
+		        textEmail.setText("");
+		    }
+		});
+		
 		btnClearFields.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		btnClearFields.setBounds(616, 11, 110, 40);
 		panel_2.add(btnClearFields);

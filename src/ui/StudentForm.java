@@ -1,6 +1,7 @@
 package ui;
 
 import Dominio.Student;
+import ui.CourseForm;
 import servicio.StudentManager;
 import servicio.FileManager;
 import javax.swing.JOptionPane;
@@ -43,6 +44,7 @@ public class StudentForm extends JFrame {
 	private JLabel lblName_1;
 	private JLabel lblID_1;
 	private JLabel lblEmail_1;
+	private JButton btnManageCourses_1;
 	
 
 	/**
@@ -96,7 +98,7 @@ public class StudentForm extends JFrame {
 		
 		panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(0, 288, 552, 239);
+		panel_1.setBounds(0, 288, 809, 239);
 		panelFondo.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -127,6 +129,54 @@ public class StudentForm extends JFrame {
 		lblEmail_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
 		lblEmail_1.setBounds(380, 2, 88, 28);
 		panel_1.add(lblEmail_1);
+		
+		
+		btnManageCourses_1 = new JButton("Cursos");
+		btnManageCourses_1.setBounds(530, 45, 140, 40);
+		panel_1.add(btnManageCourses_1);
+		btnManageCourses_1.setFont(
+		        new Font("Arial Black", Font.PLAIN, 12)
+		);
+		btnManageCourses_1.addActionListener(new ActionListener() {
+
+		    public void actionPerformed(ActionEvent e) {
+
+		        int selectedRow =
+		                tableStudents.getSelectedRow();
+
+		        if (selectedRow == -1) {
+
+		            JOptionPane.showMessageDialog(
+		                    null,
+		                    "Seleccione un estudiante"
+		            );
+
+		            return;
+		        }
+
+		        String studentId =
+		                model.getValueAt(
+		                        selectedRow,
+		                        0
+		                ).toString();
+
+		        Student student =
+		                manager.searchStudent(studentId);
+
+		        CourseForm courseForm =
+		                new CourseForm(
+		                        student,
+		                        manager
+		                );
+
+		        courseForm.setVisible(true);
+		    }
+		});
+		
+		
+		
+		
+		
 		tableStudents.getColumnModel().getColumn(0).setPreferredWidth(92);
 		tableStudents.getColumnModel().getColumn(0).setMinWidth(30);
 		tableStudents.getColumnModel().getColumn(1).setPreferredWidth(272);
@@ -216,6 +266,7 @@ public class StudentForm extends JFrame {
 		btnAddStudent.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		btnAddStudent.setBounds(32, 11, 110, 40);
 		panel_2.add(btnAddStudent);
+		
 		
 		btnSearchStudent = new JButton("Buscar");
 		//metodo para unir logica con boton buscar

@@ -40,6 +40,9 @@ public class StudentForm extends JFrame {
 	private JButton btnClearFields;
 	private StudentManager manager;
 	private DefaultTableModel model;
+	private JLabel lblName_1;
+	private JLabel lblID_1;
+	private JLabel lblEmail_1;
 	
 
 	/**
@@ -93,12 +96,12 @@ public class StudentForm extends JFrame {
 		
 		panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(0, 299, 552, 228);
+		panel_1.setBounds(0, 288, 552, 239);
 		panelFondo.add(panel_1);
 		panel_1.setLayout(null);
 		
 		tableStudents = new JTable();
-		tableStudents.setBounds(42, 25, 461, 176);
+		tableStudents.setBounds(41, 36, 461, 176);
 		panel_1.add(tableStudents);
 		tableStudents.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		tableStudents.setModel(new DefaultTableModel(
@@ -109,6 +112,21 @@ public class StudentForm extends JFrame {
 				
 				
 		));
+		
+		lblName_1 = new JLabel("Nombre");
+		lblName_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblName_1.setBounds(194, 0, 88, 32);
+		panel_1.add(lblName_1);
+		
+		lblID_1 = new JLabel("ID");
+		lblID_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblID_1.setBounds(79, 0, 88, 28);
+		panel_1.add(lblID_1);
+		
+		lblEmail_1 = new JLabel("Email");
+		lblEmail_1.setFont(new Font("Arial Black", Font.PLAIN, 14));
+		lblEmail_1.setBounds(380, 2, 88, 28);
+		panel_1.add(lblEmail_1);
 		tableStudents.getColumnModel().getColumn(0).setPreferredWidth(92);
 		tableStudents.getColumnModel().getColumn(0).setMinWidth(30);
 		tableStudents.getColumnModel().getColumn(1).setPreferredWidth(272);
@@ -365,6 +383,4 @@ public class StudentForm extends JFrame {
 	        });
 	    }
 	}
-	
-	
 }

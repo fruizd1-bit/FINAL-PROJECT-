@@ -36,7 +36,7 @@ public class CourseForm extends JFrame {
 	private JButton btnSearchCourse;
 	private JButton btnEditCourse;
 	private JButton btnDeleteCourse;
-	private JButton btnClearFields;
+	private JButton btnBack;
 	
 
 	/*
@@ -293,10 +293,16 @@ public class CourseForm extends JFrame {
 		    }
 		});
 		
-		btnClearFields = new JButton("Limpiar");
-		btnClearFields.setFont(new Font("Arial Black", Font.PLAIN, 12));
-		btnClearFields.setBounds(605, 11, 92, 27);
-		panel_1_1.add(btnClearFields);
+		btnBack = new JButton("Regresar");
+		btnBack.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		btnBack.setBounds(605, 11, 92, 27);
+		panel_1_1.add(btnBack);
+		
+		btnBack.addActionListener(e -> {
+
+		    dispose();
+		});
+		
 
 	}
 	

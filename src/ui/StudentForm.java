@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class StudentForm extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -46,32 +47,47 @@ public class StudentForm extends JFrame {
 	private JLabel lblEmail_1;
 	private JButton btnManageCourses_1;
 	
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StudentForm frame = new StudentForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	    EventQueue.invokeLater(new Runnable() {
+
+	        public void run() {
+
+	            try {
+
+	                StudentManager manager =
+	                        new StudentManager();
+
+	                FileManager.loadData(manager);
+
+	                StudentForm frame =
+	                        new StudentForm(manager);
+
+	                frame.setVisible(true);
+
+	            } catch (Exception e) {
+
+	                e.printStackTrace();
+	            }
+	        }
+	    });
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public StudentForm() {
+	public StudentForm(StudentManager manager) {
+		this.manager = manager;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 566);
 		//integracion de los servicios
-		manager = new StudentManager();
-		FileManager.loadData(manager);
+		
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

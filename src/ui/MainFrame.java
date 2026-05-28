@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,12 +14,16 @@ import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import servicio.FileManager;
+
+import servicio.StudentManager;
 
 
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private StudentManager manager;
 
 	/**
 	 * Launch the application.
@@ -40,6 +45,10 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		
+		manager = new StudentManager();
+		FileManager.loadData(manager);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 566);
 		contentPane = new JPanel();
@@ -96,6 +105,15 @@ public class MainFrame extends JFrame {
 		JButton btnNewButtonStudents = new JButton("Estudiantes");
 		btnNewButtonStudents.setBounds(46, 106, 118, 28);
 		panel.add(btnNewButtonStudents);
+		btnNewButtonStudents.addActionListener(e -> {
+
+		    StudentForm form =
+		            new StudentForm(manager);
+
+		    form.setVisible(true);
+
+		    dispose();
+		});
 		
 		
 		
@@ -118,6 +136,15 @@ public class MainFrame extends JFrame {
 		JButton btnNewButtonCourse = new JButton("Curso");
 		btnNewButtonCourse.setBounds(46, 184, 118, 28);
 		panel.add(btnNewButtonCourse);
+		btnNewButtonCourse.addActionListener(e -> {
+
+		    StudentForm form =
+		            new StudentForm(manager);
+
+		    form.setVisible(true);
+
+		    dispose();
+		});
 		
 		
 		
@@ -140,9 +167,14 @@ public class MainFrame extends JFrame {
 		
 		
 		JButton btnNewButtonEvaluations = new JButton("Evaluaciones");
-		btnNewButtonEvaluations.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
+		btnNewButtonEvaluations.addActionListener(e -> {
+
+		    StudentForm form =
+		            new StudentForm(manager);
+
+		    form.setVisible(true);
+
+		    dispose();
 		});
 		btnNewButtonEvaluations.setBounds(46, 250, 118, 28);
 		panel.add(btnNewButtonEvaluations);
@@ -169,6 +201,15 @@ public class MainFrame extends JFrame {
 		JButton btnNewButtonReports = new JButton("Reportes");
 		btnNewButtonReports.setBounds(46, 314, 118, 28);
 		panel.add(btnNewButtonReports);
+		btnNewButtonReports.addActionListener(e -> {
+
+		    ReportForm form =
+		            new ReportForm(manager);
+
+		    form.setVisible(true);
+
+		    dispose();
+		});
 		
 		
 		

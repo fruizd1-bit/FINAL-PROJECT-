@@ -39,6 +39,7 @@ public class EvaluationForm extends JFrame {
 	private Course course;
 	private StudentManager manager;
 	private DefaultTableModel model;
+	private CourseForm courseForm;
 
 
 	/**
@@ -52,11 +53,13 @@ public class EvaluationForm extends JFrame {
 	
 	public EvaluationForm(
 	        Course course,
-	        StudentManager manager
-	) {
+	        StudentManager manager,
+	        CourseForm courseForm
+	){
 
 	    this.course = course;
 	    this.manager = manager;
+	    this.courseForm = courseForm;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 566);
@@ -395,15 +398,18 @@ public class EvaluationForm extends JFrame {
 		btnDelete.setBounds(401, 11, 99, 33);
 		panel_2.add(btnDelete);
 		
-		JButton btnClean = new JButton("Limpiar");
-		btnClean.setFont(new Font("Arial Black", Font.PLAIN, 12));
-		btnClean.setBounds(521, 11, 99, 33);
-		panel_2.add(btnClean);
+		
 		
 		JButton btnBack = new JButton("Regresar");
+		btnBack.addActionListener(e -> {
+		    courseForm.setVisible(true);
+
+		    dispose();
+		});
 		btnBack.setFont(new Font("Arial Black", Font.PLAIN, 12));
-		btnBack.setBounds(646, 11, 99, 33);
+		btnBack.setBounds(529, 11, 99, 33);
 		panel_2.add(btnBack);
+		
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.LIGHT_GRAY);

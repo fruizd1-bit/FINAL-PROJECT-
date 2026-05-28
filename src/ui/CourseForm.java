@@ -196,13 +196,15 @@ public class CourseForm extends JFrame {
 
 		        if (selectedCourse != null) {
 
-		            EvaluationForm form =
-		                    new EvaluationForm(
-		                            selectedCourse,
-		                            manager
-		                    );
-
+		        	EvaluationForm form =
+		        	        new EvaluationForm(
+		        	                selectedCourse,
+		        	                manager,
+		        	                this
+		        	        );
+		            
 		            form.setVisible(true);
+		            setVisible(false);
 		        }
 
 		    } else {

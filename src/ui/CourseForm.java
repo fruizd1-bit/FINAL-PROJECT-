@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import Dominio.Course;
 import Dominio.Student;
+import ui.EvaluationForm;
 
 import servicio.FileManager;
 import servicio.StudentManager;
@@ -21,6 +22,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 
 public class CourseForm extends JFrame {
 
@@ -98,6 +100,9 @@ public class CourseForm extends JFrame {
 		refreshTable();
 		
 		
+		
+		
+		
 		JLabel lblNameCourse = new JLabel("Curso:");
 		lblNameCourse.setFont(new Font("Arial Black", Font.PLAIN, 12));
 		lblNameCourse.setBounds(10, 73, 55, 24);
@@ -150,6 +155,65 @@ public class CourseForm extends JFrame {
 		        );
 		    }
 		});
+		
+		
+		JButton btnManageEvaluations = new JButton("Evaluaciones");
+		btnManageEvaluations.setBounds(491, 35, 140, 27);
+		panel_2.add(btnManageEvaluations);
+
+		btnManageEvaluations.setFont(
+		        new Font("Arial Black", Font.PLAIN, 12)
+		);
+
+		btnManageEvaluations.addActionListener(e -> {
+
+		    int selectedRow =
+		            tableCourses.getSelectedRow();
+
+		    if (selectedRow != -1) {
+
+		        String courseName =
+		                model.getValueAt(
+		                        selectedRow,
+		                        0
+		                ).toString();
+
+		        Course selectedCourse = null;
+
+		        for (Course course :
+		                student.getCourses()) {
+
+		            if (
+		                    course.getCourseName()
+		                            .equals(courseName)
+		            ) {
+
+		                selectedCourse = course;
+
+		                break;
+		            }
+		        }
+
+		        if (selectedCourse != null) {
+
+		            EvaluationForm form =
+		                    new EvaluationForm(
+		                            selectedCourse,
+		                            manager
+		                    );
+
+		            form.setVisible(true);
+		        }
+
+		    } else {
+
+		        JOptionPane.showMessageDialog(
+		                null,
+		                "Seleccione un curso"
+		        );
+		    }
+		});
+		
 		
 		btnSearchCourse = new JButton("Buscar");
 		btnSearchCourse.setFont(new Font("Arial Black", Font.PLAIN, 12));
@@ -292,6 +356,8 @@ public class CourseForm extends JFrame {
 		        );
 		    }
 		});
+		
+		
 		
 		btnBack = new JButton("Regresar");
 		btnBack.setFont(new Font("Arial Black", Font.PLAIN, 12));

@@ -407,7 +407,7 @@ public class EvaluationForm extends JFrame {
 		    dispose();
 		});
 		btnBack.setFont(new Font("Arial Black", Font.PLAIN, 12));
-		btnBack.setBounds(529, 11, 99, 33);
+		btnBack.setBounds(530, 11, 99, 33);
 		panel_2.add(btnBack);
 		
 		

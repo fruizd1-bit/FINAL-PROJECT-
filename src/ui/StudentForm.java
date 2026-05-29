@@ -1,7 +1,6 @@
 package ui;
 
 import Dominio.Student;
-import ui.CourseForm;
 import servicio.StudentManager;
 import servicio.FileManager;
 import javax.swing.JOptionPane;
@@ -46,6 +45,7 @@ public class StudentForm extends JFrame {
 	private JLabel lblID_1;
 	private JLabel lblEmail_1;
 	private JButton btnManageCourses_1;
+	private JButton btnBack;
 	
 	
 
@@ -153,6 +153,25 @@ public class StudentForm extends JFrame {
 		btnManageCourses_1.setFont(
 		        new Font("Arial Black", Font.PLAIN, 12)
 		);
+		
+		btnBack = new JButton("Regresar");
+		btnBack.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		btnBack.setBounds(530, 112, 140, 40);
+		panel_1.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+
+		    public void actionPerformed(ActionEvent e) {
+
+		        MainFrame mainFrame =
+		                new MainFrame();
+
+		        mainFrame.setVisible(true);
+
+		        dispose();
+		    }
+		});
+		
+		
 		btnManageCourses_1.addActionListener(new ActionListener() {
 
 		    public void actionPerformed(ActionEvent e) {

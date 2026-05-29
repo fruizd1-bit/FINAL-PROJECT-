@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.EventQueue;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +22,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JButton;
 
 public class ReportForm extends JFrame {
 
@@ -35,6 +35,7 @@ public class ReportForm extends JFrame {
 	private JLabel lblStatus;
 	private DefaultTableModel model;
 	private StudentManager manager;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -70,6 +71,21 @@ public class ReportForm extends JFrame {
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(10, 11, 328, 47);
 		panel_1.add(lblNewLabel);
+		
+		btnBack = new JButton("Regresar");
+		btnBack.setFont(new Font("Arial Black", Font.PLAIN, 12));
+		btnBack.setDefaultCapable(false);
+		btnBack.setBounds(607, 11, 142, 30);
+		panel_1.add(btnBack);
+		btnBack.addActionListener(e -> {
+
+		    MainFrame mainFrame =
+		            new MainFrame();
+
+		    mainFrame.setVisible(true);
+
+		    dispose();
+		});
 		
 		comboStudents = new JComboBox<>();
 		comboStudents.setBounds(20, 107, 180, 22);

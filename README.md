@@ -87,10 +87,15 @@ El sistema utiliza `FileManager` para guardar y cargar información automáticam
 
 El sistema está compuesto por:
 - MainFrame
+![MainFrame](Imagenes/MainFrame.png)
 - StudentForm
+![StudentForm](Imagenes/StudentForm.png)
 - CourseForm
+![CourseForm](Imagenes/CourseForm.png)
 - EvaluationForm
+![EvaluationForm](Imagenes/EvaluationForm.png)
 - ReportForm
+![ReportForm](Imagenes/ReportForm.png)
 
 ---
 

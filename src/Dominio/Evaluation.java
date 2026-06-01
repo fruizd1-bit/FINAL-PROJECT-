@@ -71,6 +71,6 @@ public abstract class Evaluation {
      *
      * @return contribución calculada.
      */
-
+    //kervin garcia
     public abstract double calculateContribution();
 }

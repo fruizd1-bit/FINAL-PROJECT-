@@ -49,7 +49,6 @@ public abstract class Evaluation {
         this.percentage = percentage;
     }
 
-<<<<<<< HEAD
     // Verifica si la evaluación es válida
     public boolean isValid() {
         return name != null
@@ -72,8 +71,6 @@ public abstract class Evaluation {
      *
      * @return contribución calculada.
      */
-=======
-    // Metodo abstracto //
->>>>>>> 3c8aa76b10146d85565a7313058038bfdc84eec3
+
     public abstract double calculateContribution();
 }

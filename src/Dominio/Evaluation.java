@@ -48,6 +48,6 @@ public abstract class Evaluation {
         this.percentage = percentage;
     }
 
-    // Metodo abstracto
+    // Metodo abstracto //
     public abstract double calculateContribution();
 }
